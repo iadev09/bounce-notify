@@ -1,3 +1,6 @@
+#define _GNU_SOURCE
+#define _POSIX_C_SOURCE 200809L
+
 #include <arpa/inet.h>
 #include <errno.h>
 #include <netdb.h>
@@ -211,7 +214,6 @@ int main(int argc, char **argv) {
 
     // Write frame
     uint32_t header_len_be = htonl(header_len);
-    // uint64_t body_len_be = ... manual byte swap if needed, but let's be careful with 64 bit
     unsigned char body_len_buf[8];
     for (int i = 0; i < 8; i++) {
         body_len_buf[i] = (unsigned char) ((body_len_64 >> (8 * (7 - i))) & 0xFF);
@@ -242,3 +244,4 @@ int main(int argc, char **argv) {
     free(body);
     return 0;
 }
+
