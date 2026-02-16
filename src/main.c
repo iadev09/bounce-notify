@@ -10,6 +10,12 @@
 
 #include "bouncer_proto.h"
 
+/*
+ * MUST SYNC: This value should match 'bounce_size_limit' in Postfix main.cf.
+ * Postfix default: 50000. Recommended: 51200 (50KB).
+ * If Postfix sends more than this and we stop reading, the Rust parser
+ * will receive a truncated MIME part and fail to find the Message-ID.
+ */
 #define MAX_BODY_BYTES (50 * 1024)
 #define DEFAULT_TIMEOUT_SECS 10
 #ifndef BOUNCE_NOTIFY_VERSION
