@@ -139,4 +139,4 @@ The client implements the Bouncer binary protocol:
 ```
 
 This client acts as the entry point for raw mail ingest in the Bouncer ecosystem, as described in the
-main [Bouncer README](https://github.com/estagent/bouncer/blob/master/README.md).
+main [Bouncer README](https://github.com/iadev09/bouncer/blob/master/README.md).
