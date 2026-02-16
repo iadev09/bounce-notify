@@ -1,0 +1,62 @@
+Return-Path: <>
+From: MAILER-DAEMON@mail01.example.com (Mail Delivery System)
+To: bounces@example.com
+Subject: Undelivered Mail Returned to Sender
+Date: Mon, 16 Feb 2026 13:20:11 +0000
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+ boundary="2A6C7F0B7E.1708099211/mail01.example.com"
+
+--2A6C7F0B7E.1708099211/mail01.example.com
+Content-Type: text/plain; charset=UTF-8
+Content-Description: Notification
+
+This is the mail system at host mail01.example.com.
+
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+
+For further assistance, please send mail to postmaster.
+
+If you do so, please include this problem report. You can
+delete your own text from the attached returned message.
+
+                   The mail system
+
+<user@remote.example>: host mx.remote.example[203.0.113.5] said:
+  550 5.1.1 <user@remote.example>: Recipient address rejected: User unknown
+  (in reply to RCPT TO command)
+
+--2A6C7F0B7E.1708099211/mail01.example.com
+Content-Type: message/delivery-status
+Content-Description: Delivery report
+
+Reporting-MTA: dns; mail01.example.com
+X-Postfix-Queue-ID: 3F2A812345
+Arrival-Date: Mon, 16 Feb 2026 13:19:58 +0000
+
+Final-Recipient: rfc822; user@remote.example
+Original-Recipient: rfc822; user@remote.example
+Action: failed
+Status: 5.1.1
+Remote-MTA: dns; mx.remote.example
+Diagnostic-Code: smtp; 550 5.1.1 <user@remote.example>: Recipient address rejected: User unknown
+
+--2A6C7F0B7E.1708099211/mail01.example.com
+Content-Type: message/rfc822
+Content-Description: Undelivered Message
+
+Return-Path: <sender@example.com>
+From: Sender Name <sender@example.com>
+To: user@remote.example
+Subject: Test message
+Date: Mon, 16 Feb 2026 13:19:56 +0000
+Message-ID: <abc123def456@mailapp.example.com>
+X-Message-Id: abc123def456
+
+
+Hello,
+This is a test.
+
+--2A6C7F0B7E.1708099211/mail01.example.com--

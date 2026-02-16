@@ -1,0 +1,82 @@
+# Compilation outputs
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.a
+*.lib
+
+/build/
+/build-*/
+# CMake
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+.cmake/
+
+# IDEs
+# CLion / IntelliJ
+.idea/
+cmake-build-debug/
+cmake-build-release/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Neovim / Vim
+*.swp
+*.swo
+.netrwhist
+undo/
+.nvim.lua
+
+# OS specific
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Project specific
+bouncer_c_client

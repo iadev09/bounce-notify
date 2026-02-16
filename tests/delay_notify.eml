@@ -1,0 +1,47 @@
+From: MAILER-DAEMON@yourdomain.com (Mail Delivery System)
+Subject: Delayed Mail (still being retried)
+To: sender@yourdomain.com
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+    boundary="4B2C1160852B.1708000000/host.example.com"
+
+--4B2C1160852B.1708000000/host.example.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host host.example.com.
+
+####################################################################
+# THIS IS A WARNING ONLY.  YOU DO NOT NEED TO RESEND YOUR MESSAGE. #
+####################################################################
+
+Your message could not be delivered for 4 hours.
+It will be retried for up to 5 days.
+
+--4B2C1160852B.1708000000/host.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; host.example.com
+X-Postfix-Queue-ID: 4B2C1160852B
+Arrival-Date: Mon, 16 Feb 2026 10:00:00 +0000 (UTC)
+
+Final-Recipient: rfc822; remote-user@target-domain.com
+Action: delayed
+Status: 4.4.1
+Diagnostic-Code: X-Postfix; connect to target-domain.com:25: Connection timed out
+Will-Retry-Until: Sat, 21 Feb 2026 10:00:00 +0000 (UTC)
+
+--4B2C1160852B.1708000000/host.example.com
+Content-Description: Undelivered Message Headers
+Content-Type: text/rfc822-headers
+
+Return-Path: <sender@yourdomain.com>
+Received: by host.example.com (Postfix, from userid 1000)
+    id 4B2C1160852B; Mon, 16 Feb 2026 10:00:00 +0000 (UTC)
+Message-ID: <your-app-unique-id-123@yourdomain.com>
+Subject: Test Message
+To: <remote-user@target-domain.com>
+From: <sender@yourdomain.com>
+
+--4B2C1160852B.1708000000/host.example.com--
