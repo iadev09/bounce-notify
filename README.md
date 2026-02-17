@@ -110,7 +110,7 @@ bounce-notify unix  -       n       n       -       -       pipe
 2. Configure bounce notices in `main.cf`:
 
 ```conf
-notify_classes = bounce, ...
+notify_classes = bounce, delay
 bounce_notice_recipient = bounces@domain.com
 bounce_size_limit = 51200
 ```
