@@ -45,7 +45,7 @@ typedef enum {
 
 void print_usage(const char *progname) {
     fprintf(stderr,
-            "Usage: %s --server host:port --from sender --to recipient [--timeout-secs 10] [--version]\n",
+            "bounce-notify: Usage: %s --server host:port --from sender --to recipient [--timeout-secs 10] [--version]\n",
             progname);
 }
 
@@ -71,7 +71,7 @@ parse_result_t parse_args(int argc, char **argv, cli_args_t *args) {
         } else if (strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0) {
             return PARSE_VERSION;
         } else {
-            fprintf(stderr, "Unknown or missing argument: %s\n", argv[i]);
+            fprintf(stderr, "bounce-notify: Unknown or missing argument: %s\n", argv[i]);
             return PARSE_USAGE;
         }
     }
@@ -180,7 +180,7 @@ int main(int argc, char **argv) {
     // Read body from stdin
     unsigned char *body = malloc(MAX_BODY_BYTES + 1);
     if (!body) {
-        fprintf(stderr, "Failed to allocate memory for body\n");
+        fprintf(stderr, "bounce-notify: Failed to allocate memory for body\n");
         return EX_TEMPFAIL;
     }
 
@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
     while ((n = read(STDIN_FILENO, body + body_len, MAX_BODY_BYTES + 1 - body_len)) > 0) {
         body_len += n;
         if (body_len > MAX_BODY_BYTES) {
-            fprintf(stderr, "Mail body too large\n");
+            fprintf(stderr, "bounce-notify: Mail body too large\n");
             free(body);
             return EX_TEMPFAIL;
         }
@@ -198,6 +198,7 @@ int main(int argc, char **argv) {
     bouncer_header_t header = {.from = args.from, .to = args.to, .kind = NULL, .source = NULL};
     char *header_json = serialize_header(&header);
     if (!header_json) {
+        fprintf(stderr, "bounce-notify: Failed to serialize frame header\n");
         free(body);
         return EX_TEMPFAIL;
     }
@@ -206,7 +207,7 @@ int main(int argc, char **argv) {
 
     int sockfd = resolve_and_connect(args.server, args.timeout_secs);
     if (sockfd == -1) {
-        fprintf(stderr, "Failed to connect to %s\n", args.server);
+        fprintf(stderr, "bounce-notify: Failed to connect to %s\n", args.server);
         free(header_json);
         free(body);
         return EX_TEMPFAIL;
@@ -222,7 +223,7 @@ int main(int argc, char **argv) {
     if (write_all(sockfd, BOUNCER_MAGIC, 4) != 0 || write_all(sockfd, &header_len_be, 4) != 0 ||
         write_all(sockfd, body_len_buf, 8) != 0 || write_all(sockfd, header_json, header_len) != 0 ||
         write_all(sockfd, body, body_len) != 0) {
-        fprintf(stderr, "Failed to send frame\n");
+        fprintf(stderr, "bounce-notify: Failed to send frame\n");
         close(sockfd);
         free(header_json);
         free(body);
@@ -232,7 +233,7 @@ int main(int argc, char **argv) {
     // Read ACK
     char ack_buf[3];
     if (read_all(sockfd, ack_buf, 3) != 0 || memcmp(ack_buf, BOUNCER_ACK, 3) != 0) {
-        fprintf(stderr, "Invalid or missing ACK from server\n");
+        fprintf(stderr, "bounce-notify: Invalid or missing ACK from server\n");
         close(sockfd);
         free(header_json);
         free(body);
@@ -244,4 +245,3 @@ int main(int argc, char **argv) {
     free(body);
     return 0;
 }
-
